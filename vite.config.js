@@ -1,10 +1,20 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
+import { defineConfig, loadEnv } from "vite";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
 
-// https://vite.dev/config/
-export default defineConfig({
-  plugins: [react(), tailwindcss()],
-  port:5000,
-  base: '/'
-})
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), "");
+
+  return {
+    plugins: [react(), tailwindcss()],
+    base: "/",
+    server: {
+      port: Number(env.VITE_PORT) || 5000,
+      host: true,
+      strictPort: true,
+    },
+    preview: {
+      port: 5000,
+    },
+  };
+});
