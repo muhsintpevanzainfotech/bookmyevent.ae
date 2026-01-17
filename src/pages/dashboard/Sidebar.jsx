@@ -1,7 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { Home, User, Calendar } from "lucide-react";
-import Menu from "../../../public/menu.svg";
-import Favicon from "../../../public/favicon.svg";
+import Menu from "../../assets/logos/menu.svg";
 import { X } from "lucide-react";
 
 export default function Sidebar({ open, onClose }) {

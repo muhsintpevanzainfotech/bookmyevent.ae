@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { navLinks } from "../data/navLinks";
+import SearchBarWithLocation from "./search/SearchBarWithLocation";
 
 /* ================= REUSABLE SIDE DRAWER ================= */
 function SideDrawer({ open, onClose, title, children }) {
@@ -135,14 +136,7 @@ export default function Navbar() {
 
           {/* Search Desktop */}
           <div className="hidden md:flex flex-1 max-w-xl mx-8">
-            <div className="flex w-full items-center bg-gray-100 rounded-full px-4 py-2">
-              <Search size={18} className="text-gray-400" />
-              <input
-                type="text"
-                placeholder="Find your best package"
-                className="w-full bg-transparent outline-none px-3 text-sm"
-              />
-            </div>
+            <SearchBarWithLocation />
           </div>
 
           {/* Desktop Icons */}

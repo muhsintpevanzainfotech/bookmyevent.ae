@@ -1,4 +1,6 @@
 import { Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 // Layouts
 import PublicLayout from "./layouts/PublicLayout";
@@ -8,6 +10,7 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import SignIn from "./pages/auth/SignIn";
 import SignUp from "./pages/auth/SignUp";
+import ForgotPassword from "./pages/auth/ForgotPassword";
 
 // Dashboard
 import DashboardLayout from "./pages/dashboard/DashboardLayout";
@@ -19,32 +22,53 @@ import MyBookings from "./pages/dashboard/MyBookings";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import PublicOnlyRoute from "./routes/PublicOnlyRoute";
 
+// Redux
+import { loadDataRequest } from "./features/global/globalSlice";
+
 export default function App() {
+  const dispatch = useDispatch();
+
+  // 🔥 Load global data once
+  useEffect(() => {
+    dispatch(loadDataRequest());
+  }, [dispatch]);
+
   return (
     <Routes>
-      {/* ================= PUBLIC ================= */}
+      {/* ================= AUTH (NO NAVBAR / FOOTER) ================= */}
+      <Route
+        path="/signin"
+        element={
+          <PublicOnlyRoute>
+            <SignIn />
+          </PublicOnlyRoute>
+        }
+      />
+
+      <Route
+        path="/signup"
+        element={
+          <PublicOnlyRoute>
+            <SignUp />
+          </PublicOnlyRoute>
+        }
+      />
+
+      <Route
+        path="/forgot-password"
+        element={
+          <PublicOnlyRoute>
+            <ForgotPassword />
+          </PublicOnlyRoute>
+        }
+      />
+
+      {/* ================= PUBLIC (WITH NAVBAR / FOOTER) ================= */}
       <Route element={<PublicLayout />}>
         <Route path="/" element={<Home />} />
-
-        <Route
-          path="/signin"
-          element={
-            <PublicOnlyRoute>
-              <SignIn />
-            </PublicOnlyRoute>
-          }
-        />
-        <Route
-          path="/signup"
-          element={
-            <PublicOnlyRoute>
-              <SignUp />
-            </PublicOnlyRoute>
-          }
-        />
       </Route>
 
-      {/* ================= DASHBOARD ================= */}
+      {/* ================= DASHBOARD (PROTECTED) ================= */}
       <Route
         path="/dashboard"
         element={
@@ -57,7 +81,6 @@ export default function App() {
         <Route path="profile" element={<Profile />} />
         <Route path="bookings" element={<MyBookings />} />
       </Route>
-
 
       {/* ================= 404 ================= */}
       <Route path="*" element={<NotFound />} />
