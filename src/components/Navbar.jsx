@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import {
   Menu,
   X,
-  Search,
   ChevronDown,
   Bell,
   User,

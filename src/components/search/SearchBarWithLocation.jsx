@@ -30,7 +30,7 @@ export default function SearchBarWithLocation() {
     <>
       {/* SEARCH BAR */}
       <div className="w-full max-w-2xl mx-auto">
-        <div className="flex items-center bg-gray-100 rounded-full px-4 py-2 shadow-sm">
+        <div className="flex items-center bg-gray-100 rounded px-4 py-2 shadow-sm">
 
           {/* SEARCH ICON */}
           <Search size={18} className="text-gray-400" />
