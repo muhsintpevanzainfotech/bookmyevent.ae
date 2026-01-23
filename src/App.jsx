@@ -24,18 +24,22 @@ import PublicOnlyRoute from "./routes/PublicOnlyRoute";
 
 // Redux
 import { loadDataRequest } from "./features/global/globalSlice";
+import { loadModulesRequest } from "./features/modules/moduleSlice";
+import { loadSecondaryModulesRequest } from "./features/secondaryModules/secondaryModuleSlice";
 
 export default function App() {
   const dispatch = useDispatch();
 
-  // 🔥 Load global data once
   useEffect(() => {
-    dispatch(loadDataRequest());
+    // 🔥 Load everything once
+    dispatch(loadDataRequest());               // global data
+    dispatch(loadModulesRequest());            // main services
+    dispatch(loadSecondaryModulesRequest());   // sub services
   }, [dispatch]);
 
   return (
     <Routes>
-      {/* ================= AUTH (NO NAVBAR / FOOTER) ================= */}
+      {/* ================= AUTH ================= */}
       <Route
         path="/signin"
         element={
@@ -63,12 +67,12 @@ export default function App() {
         }
       />
 
-      {/* ================= PUBLIC (WITH NAVBAR / FOOTER) ================= */}
+      {/* ================= PUBLIC ================= */}
       <Route element={<PublicLayout />}>
         <Route path="/" element={<Home />} />
       </Route>
 
-      {/* ================= DASHBOARD (PROTECTED) ================= */}
+      {/* ================= DASHBOARD ================= */}
       <Route
         path="/dashboard"
         element={

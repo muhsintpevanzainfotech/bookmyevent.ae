@@ -3,6 +3,9 @@ import createSagaMiddleware from "redux-saga";
 
 import authReducer from "../features/auth/authSlice";
 import globalReducer from "../features/global/globalSlice";
+import moduleReducer from "../features/modules/moduleSlice";
+import secondaryModuleReducer from "../features/secondaryModules/secondaryModuleSlice";
+
 import rootSaga from "../sagas/rootSaga";
 
 const sagaMiddleware = createSagaMiddleware();
@@ -11,9 +14,11 @@ export const store = configureStore({
   reducer: {
     auth: authReducer,
     global: globalReducer,
+    modules: moduleReducer,
+    secondaryModules: secondaryModuleReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware),
+    getDefaultMiddleware({ thunk: false,serializableCheck: false, }).concat(sagaMiddleware),
 });
 
 sagaMiddleware.run(rootSaga);

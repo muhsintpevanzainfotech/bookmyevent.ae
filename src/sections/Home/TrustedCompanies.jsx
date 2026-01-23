@@ -1,5 +1,5 @@
 import Marquee from "react-fast-marquee";
-import { companiesLogo } from "../data/companiesLogo";
+import { companiesLogo } from "../../data/companiesLogo";
 
 export default function TrustedCompanies() {
     return (

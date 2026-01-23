@@ -7,14 +7,21 @@ import {
   Linkedin,
   Youtube,
 } from "lucide-react";
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Footer() {
+  const modules = useSelector((s) => s.modules?.modules || []);
+  const secondaryModules = useSelector(
+    (s) => s.secondaryModules?.secondaryModules || []
+  );
+
   return (
-    <footer className="bg-black text-gray-300">
+    <footer className="bg-black text-gray-300 mb-10 md:mb-0">
+
       {/* ================= TOP INQUIRY BAR ================= */}
       <div className="border-b border-gray-700">
         <div className="max-w-7xl mx-auto px-6 py-6 grid md:grid-cols-4 gap-6 text-sm">
-          {/* Inquiry */}
           <div className="flex items-center gap-3">
             <MessageCircle className="text-red-500" />
             <div>
@@ -23,7 +30,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* WhatsApp */}
           <div className="flex items-center gap-3">
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
@@ -35,7 +41,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Email */}
           <div className="flex items-center gap-3">
             <Mail className="text-blue-500" />
             <div>
@@ -44,7 +49,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Call */}
           <div className="flex items-center gap-3">
             <Phone className="text-green-500" />
             <div>
@@ -67,7 +71,6 @@ export default function Footer() {
             Kochi, Kerala 683104
           </p>
 
-          {/* Social */}
           <div className="flex gap-4 mt-4">
             <Facebook />
             <Instagram />
@@ -75,73 +78,58 @@ export default function Footer() {
             <Youtube />
           </div>
 
-          {/* App */}
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
             className="h-12 mt-6"
           />
         </div>
 
-        {/* MAIN SERVICES */}
+        {/* ================= MAIN SERVICES (API) ================= */}
         <div>
           <h4 className="text-white font-semibold mb-4">Main Services</h4>
           <ul className="space-y-2 text-sm">
-            {[
-              "Venues",
-              "Photography",
-              "Makeup Artist",
-              "Catering",
-              "Cake",
-              "Transport",
-              "Boutique",
-              "Ornaments",
-            ].map((item) => (
-              <li key={item} className="hover:text-white cursor-pointer">
-                {item}
+            {modules.map((m) => (
+              <li key={m._id}>
+                <NavLink
+                  to={`/service/${m.title.toLowerCase().replace(/\s+/g, "-")}/${m._id}`}
+                  className="hover:text-white"
+                >
+                  {m.title}
+                </NavLink>
               </li>
             ))}
           </ul>
         </div>
 
-        {/* OTHER SERVICES */}
+        {/* ================= OTHER SERVICES (API) ================= */}
         <div>
           <h4 className="text-white font-semibold mb-4">Other Services</h4>
           <ul className="space-y-2 text-sm">
-            {[
-              "Florist & Stage",
-              "Invitation & Printing",
-              "Light & Sounds",
-              "Mehandi Artist",
-              "Bouncers & Security",
-              "Event Host / Emcee",
-              "Panthal & Decorations",
-              "Event Professionals",
-            ].map((item) => (
-              <li key={item} className="hover:text-white cursor-pointer">
-                {item}
+            {secondaryModules.map((s) => (
+              <li key={s._id}>
+                <NavLink
+                  to={`/otherservice/${s.title.toLowerCase().replace(/\s+/g, "-")}/${s._id}`}
+                  className="hover:text-white"
+                >
+                  {s.title}
+                </NavLink>
               </li>
             ))}
           </ul>
         </div>
 
-        {/* RESOURCES */}
+        {/* ================= RESOURCES ================= */}
         <div>
           <h4 className="text-white font-semibold mb-4">Resources</h4>
           <ul className="space-y-2 text-sm">
-            {[
-              "Home",
-              "About Book My Event",
-              "Contact",
-              "Insight",
-              "Terms & Condition",
-              "Privacy Policy",
-              "Cancellation & Refund",
-              "Sitemap",
-            ].map((item) => (
-              <li key={item} className="hover:text-white cursor-pointer">
-                {item}
-              </li>
-            ))}
+            <li><NavLink to="/" className="hover:text-white">Home</NavLink></li>
+            <li><NavLink to="/about" className="hover:text-white">About Book My Event</NavLink></li>
+            <li><NavLink to="/contact" className="hover:text-white">Contact</NavLink></li>
+            <li><NavLink to="/insight" className="hover:text-white">Insight</NavLink></li>
+            <li><NavLink to="/terms" className="hover:text-white">Terms & Condition</NavLink></li>
+            <li><NavLink to="/privacy" className="hover:text-white">Privacy Policy</NavLink></li>
+            <li><NavLink to="/refund" className="hover:text-white">Cancellation & Refund</NavLink></li>
+            <li><NavLink to="/sitemap" className="hover:text-white">Sitemap</NavLink></li>
           </ul>
         </div>
       </div>
@@ -150,8 +138,7 @@ export default function Footer() {
       <div className="border-t border-gray-700">
         <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
           <p>
-            © 2025 <span className="text-white">Book My Event</span> | All Rights
-            Reserved.
+            © 2025 <span className="text-white">Book My Event</span> | All Rights Reserved.
           </p>
 
           <div className="flex items-center gap-3">

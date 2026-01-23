@@ -1,7 +1,7 @@
 import Marquee from "react-fast-marquee";
-import TestimonialCard from "../components/TestimonialCard";
-import { testimonialsData } from "../data/testimonialsData";
-import SectionTitle from "../components/SectionTitle";
+import TestimonialCard from "../../components/TestimonialCard";
+import { testimonialsData } from "../../data/testimonialsData";
+import SectionTitle from "../../components/SectionTitle";
 
 export default function Testimonials() {
     return (

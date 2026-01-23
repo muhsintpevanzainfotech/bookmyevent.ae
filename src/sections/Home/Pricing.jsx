@@ -1,6 +1,6 @@
 import { SparklesIcon } from "lucide-react";
-import SectionTitle from "../components/SectionTitle";
-import { pricingData } from "../data/pricingData";
+import SectionTitle from "../../components/SectionTitle";
+import { pricingData } from "../../data/pricingData";
 
 export default function Pricing() {
     return (

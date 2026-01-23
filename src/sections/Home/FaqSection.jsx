@@ -1,7 +1,7 @@
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
-import SectionTitle from "../components/SectionTitle";
-import { faqsData } from "../data/faqsData";
+import SectionTitle from "../../components/SectionTitle";
+import { faqsData } from "../../data/faqsData";
 
 export const FaqSection = () => {
     const [openIndex, setOpenIndex] = useState(null);
